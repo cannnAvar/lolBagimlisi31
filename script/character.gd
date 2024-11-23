@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 @export var max_jump = 2
 var jump
-var is_looking_left = true
+var is_looking_left = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
