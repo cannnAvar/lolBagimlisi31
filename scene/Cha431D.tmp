@@ -1,8 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd73vvf0nrm8l"]
+[gd_scene load_steps=6 format=3 uid="uid://bd73vvf0nrm8l"]
 
 [ext_resource type="Script" path="res://script/character.gd" id="1_3mlrr"]
 [ext_resource type="Texture2D" uid="uid://mn3rjychumoh" path="res://iconq.png" id="2_omsdr"]
 [ext_resource type="Texture2D" uid="uid://b2v6h4exndglo" path="res://textures/Sword.png" id="3_cvf0t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2cmlp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_omsdr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxtuh"]
 size = Vector2(128, 128)
@@ -11,13 +22,14 @@ size = Vector2(128, 128)
 script = ExtResource("1_3mlrr")
 JUMP_VELOCITY = 600.0
 
-[node name="Sword" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2cmlp")
+frame_progress = 0.67778
+
+[node name="Sword" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(80, 0)
 scale = Vector2(2.25, 2.25)
 texture = ExtResource("3_cvf0t")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_omsdr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_sxtuh")
