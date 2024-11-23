@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b16uueemg8f30"]
+[gd_scene load_steps=3 format=3 uid="uid://cjnvbqh4v3q3a"]
 
 [ext_resource type="Texture2D" uid="uid://dgi3a7qius7wd" path="res://icon.svg" id="1_lnb8j"]
 
@@ -9,11 +9,12 @@ radius = 56.4426
 
 [node name="Area2D" type="Area2D" parent="."]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.96694, -64.1356)
+scale = Vector2(0.390625, 1.04688)
+shape = SubResource("CircleShape2D_vo46o")
+
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
 position = Vector2(-3, -63)
 scale = Vector2(0.390625, 1.04688)
 texture = ExtResource("1_lnb8j")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Sprite2D"]
-position = Vector2(2.64463, -1.08475)
-shape = SubResource("CircleShape2D_vo46o")
