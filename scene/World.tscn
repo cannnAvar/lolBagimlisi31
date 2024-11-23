@@ -17,7 +17,7 @@ sources/1 = SubResource("TileSetAtlasSource_ikko1")
 [node name="World" type="Node2D"]
 
 [node name="Character" parent="." instance=ExtResource("2_0lu7o")]
-position = Vector2(96, 64)
+position = Vector2(216, 176)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAQAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAIAAQAAQAAAAAAAAA=")
