@@ -11,7 +11,11 @@ config_version=5
 [application]
 
 config/name="lolbagimlisi31"
+<<<<<<< HEAD
 run/main_scene="res://scene/CanavarWorld.tscn"
+=======
+run/main_scene="res://World.tscn"
+>>>>>>> f89cc044a462c33cb596f4c5a4951c46d25016a0
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
