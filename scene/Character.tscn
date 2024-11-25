@@ -1,32 +1,141 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd73vvf0nrm8l"]
+[gd_scene load_steps=14 format=3 uid="uid://bd73vvf0nrm8l"]
 
 [ext_resource type="Script" path="res://script/character.gd" id="1_3mlrr"]
-[ext_resource type="Texture2D" uid="uid://mn3rjychumoh" path="res://iconq.png" id="2_omsdr"]
-[ext_resource type="Texture2D" uid="uid://b2v6h4exndglo" path="res://textures/Sword.png" id="3_cvf0t"]
+[ext_resource type="Texture2D" uid="uid://d31o82lln06vp" path="res://textures/oyuncu-Sheet.png" id="3_8qgih"]
+[ext_resource type="Texture2D" uid="uid://nmuww2l1rpvm" path="res://textures/Sword.png" id="3_cvf0t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vw8om"]
+atlas = ExtResource("3_8qgih")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77hnv"]
+atlas = ExtResource("3_8qgih")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lu03g"]
+atlas = ExtResource("3_8qgih")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u374f"]
+atlas = ExtResource("3_8qgih")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_py8px"]
+atlas = ExtResource("3_8qgih")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jdecf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vw8om")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77hnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lu03g")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u374f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_py8px")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxtuh"]
-size = Vector2(128, 128)
+size = Vector2(16, 32)
+
+[sub_resource type="Animation" id="Animation_60qd1"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(16, -8), Vector2(16, -15), Vector2(25, -16), Vector2(20, 13), Vector2(16, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.52425, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_6ietk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(88, -24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_34psv"]
+_data = {
+"RESET": SubResource("Animation_6ietk"),
+"attack": SubResource("Animation_60qd1")
+}
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_3mlrr")
 JUMP_VELOCITY = 600.0
 
-[node name="Sword" type="Sprite2D" parent="."]
-position = Vector2(80, 0)
-scale = Vector2(2.25, 2.25)
-texture = ExtResource("3_cvf0t")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jdecf")
+animation = &"walk"
+autoplay = "idle"
+frame_progress = 0.372775
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_omsdr")
+[node name="Sword" type="Sprite2D" parent="."]
+position = Vector2(16, -8)
+scale = Vector2(1, 1)
+texture = ExtResource("3_cvf0t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_sxtuh")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_smoothed = true
-position_smoothing_enabled = true
-drag_vertical_offset = -1.0
-drag_left_margin = 0.5
-drag_right_margin = 0.5
-editor_draw_limits = true
-editor_draw_drag_margin = true
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_34psv")
+}

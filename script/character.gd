@@ -8,7 +8,11 @@ extends CharacterBody2D
 var jump
 var is_looking_left = false
 
+
+
+
 func _physics_process(delta: float) -> void:
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -17,18 +21,21 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Jump") and jump > 0:
 		velocity.y = JUMP_VELOCITY * -1
 		jump -= 1
-	
 	if is_on_floor():
 		jump = max_jump
-	
-	
+
+
 	# Get the input direction: -1, 0, 1
 	var direction := Input.get_axis("Left", "Right")
-	
+
 	if direction:
 		velocity.x = direction * SPEED
+		$Sprite2D.play("walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		$Sprite2D.play("idle")
+
+
 
 
 	# When input is left look left. When input is right look right 
@@ -39,5 +46,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Right") and is_looking_left == true:
 		scale.x *= -1
 		is_looking_left = false
+
+
+	if Input.is_action_just_pressed("Attack"):
+		$AnimationPlayer.play("attack")
 
 	move_and_slide()
